@@ -15,20 +15,19 @@ import javax.sql.DataSource;
 
 public class UserDaoImpl implements UserDao {
 
-     private JdbcTemplate jdbcTemplate;
-
     @Autowired
-    public void setJdbcTemplate(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    JdbcTemplate jdbcTemplate;
+
+
+//    public void setJdbcTemplate(DataSource dataSource) {
+//        jdbcTemplate = new JdbcTemplate(dataSource);
+//    }
 
 
     @Override
         public void addUser(User user) {
 
-
-
-                jdbcTemplate.update("INSERT INTO public.users(login, password) VALUES (?, ?);",
+        jdbcTemplate.update("INSERT INTO public.users(login, password) VALUES (?, ?);",
                 new Object[]{user.getLogin(), user.getPassword()}, new Object[]{String.class, String.class});
 
     }
