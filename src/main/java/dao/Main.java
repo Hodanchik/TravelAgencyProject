@@ -1,45 +1,39 @@
 package dao;
 
 import entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
 
 
-        Logger logger = LoggerFactory.getLogger(Main.class);
-        logger.info("This is how you configure Java Logging with SLF4J");
+//        Logger logger = LoggerFactory.getLogger(Main.class);
+//        logger.info("This is how you configure Java Logging with SLF4J");
+//
+//
+//        ApplicationContext context = new ClassPathXmlApplicationContext(
+//                "applicationContext.xml");
 
 
-        Tester test = new Tester();
-        List<User> users = test.fetchData();
-        System.out.println(users.toString());
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        String[] mas = ctx.getBeanDefinitionNames();
 
-        List<String> countries = new ArrayList<>();
-
-
-        String[] isoCountries = Locale.getISOCountries();
-        for (int i = 0; i < 25; i++) {
-
-
-            Locale locale = new Locale("en", isoCountries[i]);
-
-            String name = locale.getDisplayCountry();
-            countries.add(name);
+        for (String one : mas) {
+            System.out.println(one);
         }
-        test.addToCountry(countries);
+        User usern = new User("lapa", "shara32");
 
-        for (String country : countries) {
-            System.out.println(country);
-        }
+        UserDaoImpl userTesr = new UserDaoImpl();
+
+        userTesr.addUser(usern);
+
+
     }
-
-
 }
+
+
