@@ -4,6 +4,7 @@ import entity.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,13 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 
 
-@Service
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private  JdbcTemplate jdbcTemplate;
 
 //    public void setJdbcTemplate(DataSource dataSource) {
 //        jdbcTemplate = new JdbcTemplate(dataSource);
@@ -25,24 +26,26 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-        public void addUser(User user) {
+    public void addUser(User user) {
 
-        jdbcTemplate.update("INSERT INTO public.users(login, password) VALUES (?, ?);",
-                new Object[]{user.getLogin(), user.getPassword()}, new Object[]{String.class, String.class});
 
+
+        int id = jdbcTemplate.queryForObject("INSERT INTO public.users(login, password) VALUES (?, ?) RETURNING id;",
+               new Object[] { user.getLogin(), user.getPassword()}, Integer.class);
+        user.setId(id);
     }
 
     @Override
     public void updateUser(User user) {
         jdbcTemplate.update("UPDATE public.users SET  login=?, password=? WHERE id = ?;",
-                new Object[]{user.getLogin(), user.getPassword(), user.getId()}, new Object[]{String.class, String.class, Integer.class});
+                user.getLogin(), user.getPassword(), user.getId());
     }
 
 
     @Override
     public void deleteUser(User user) {
         jdbcTemplate.update("DELETE FROM public.users WHERE id=?;",
-                new Object[]{user.getId()}, new Object[]{Integer.class}) ;
+                user.getId());
 
     }
 }

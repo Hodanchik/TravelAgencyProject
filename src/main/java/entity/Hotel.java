@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Hotel {
@@ -9,12 +11,32 @@ public class Hotel {
     private String website;
     private float lalitude;
     private float longitude;
-    private Set<FeaturesType> features;
+    private List<FeaturesType> features;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, int stars, String website, int lalitude, int longitude, Set<FeaturesType> features) {
+    public Hotel(int id, String name, int stars, String website) {
+        this.id = id;
+        this.name = name;
+        this.stars = stars;
+        this.website = website;
+    }
+
+    public Hotel(int id, String name, int stars, String website, float lalitude, float longitude) {
+        this.id = id;
+        this.name = name;
+        this.stars = stars;
+        this.website = website;
+        this.lalitude = lalitude;
+        this.longitude = longitude;
+    }
+
+    public Hotel(int id) {
+        this.id = id;
+    }
+
+    public Hotel(int id, String name, int stars, String website, float lalitude, float longitude, List<FeaturesType> features) {
         this.id = id;
         this.name = name;
         this.stars = stars;
@@ -24,11 +46,20 @@ public class Hotel {
         this.features = features;
     }
 
-    public Set<FeaturesType> getFeatures() {
+    public Hotel(String name, int stars, String website, float lalitude, float longitude, List<FeaturesType> features) {
+        this.name = name;
+        this.stars = stars;
+        this.website = website;
+        this.lalitude = lalitude;
+        this.longitude = longitude;
+        this.features = features;
+    }
+
+    public List<FeaturesType> getFeatures() {
         return features;
     }
 
-    public void setFeatures(Set<FeaturesType> features) {
+    public void setFeatures(List<FeaturesType> features) {
         this.features = features;
     }
 
@@ -89,6 +120,7 @@ public class Hotel {
                 ", website='" + website + '\'' +
                 ", lalitude=" + lalitude +
                 ", longitude=" + longitude +
+                ", features=" + features +
                 '}';
     }
 }

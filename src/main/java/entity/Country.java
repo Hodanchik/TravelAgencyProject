@@ -4,6 +4,13 @@ public class Country {
     private int id;
     private String name;
 
+    public Country(String name) {
+        this.name = name;
+    }
+
+    public Country(int id) {
+        this.id = id;
+    }
 
     public Country() {
     }

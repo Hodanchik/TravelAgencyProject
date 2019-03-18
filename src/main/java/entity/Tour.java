@@ -1,42 +1,48 @@
 package entity;
 
-import java.awt.*;
-import java.time.Period;
+
+import java.time.LocalDate;
+
 import java.util.Date;
 
 public class Tour {
     private int id;
-    private Image photo;
-    private Date data;
-    private Period duration;
+    private String photo;
+    private LocalDate data;
+    private int duration;
     private String description;
-    private double cost;
+    private int cost;
     private  TourType tour_type;
     private int hotel_id;
     private int country_id;
 
 
 
+
     public Tour() {
     }
 
-
-
-
-    public Period getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Period duration) {
+    public Tour(String photo, LocalDate data, int duration, String description, int cost, TourType tour_type, int hotel_id, int country_id) {
+        this.photo = photo;
+        this.data = data;
         this.duration = duration;
-    }
-
-    public TourType getTour_type() {
-        return tour_type;
-    }
-
-    public void setTour_type(TourType tour_type) {
+        this.description = description;
+        this.cost = cost;
         this.tour_type = tour_type;
+        this.hotel_id = hotel_id;
+        this.country_id = country_id;
+    }
+
+    public Tour(int id, String photo, LocalDate data, int duration, String description, int cost, TourType tour_type, int hotel_id, int country_id) {
+        this.id = id;
+        this.photo = photo;
+        this.data = data;
+        this.duration = duration;
+        this.description = description;
+        this.cost = cost;
+        this.tour_type = tour_type;
+        this.hotel_id = hotel_id;
+        this.country_id = country_id;
     }
 
     public int getId() {
@@ -47,23 +53,29 @@ public class Tour {
         this.id = id;
     }
 
-    public Image getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Image photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
+    public int getDuration() {
+        return duration;
+    }
 
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public String getDescription() {
         return description;
@@ -73,12 +85,20 @@ public class Tour {
         this.description = description;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public TourType getTour_type() {
+        return tour_type;
+    }
+
+    public void setTour_type(TourType tour_type) {
+        this.tour_type = tour_type;
     }
 
     public int getHotel_id() {
@@ -101,13 +121,15 @@ public class Tour {
     public String toString() {
         return "Tour{" +
                 "id=" + id +
-                ", photo=" + photo +
+                ", photo='" + photo + '\'' +
                 ", data=" + data +
                 ", duration=" + duration +
                 ", description='" + description + '\'' +
                 ", cost=" + cost +
+                ", tour_type=" + tour_type +
                 ", hotel_id=" + hotel_id +
                 ", country_id=" + country_id +
                 '}';
     }
+
 }

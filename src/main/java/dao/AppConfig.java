@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
-@ComponentScan(basePackages = {"dao.*"})
+@ComponentScan(basePackages = {"dao"})
 public class AppConfig {
 
     @Bean
@@ -30,7 +30,7 @@ public class AppConfig {
         return dataSource;
     }
 
-    @Bean
+   @Bean
     @Autowired
     public JdbcTemplate jdbcTemplate(DataSource dataSource) throws SQLException {
         return new JdbcTemplate(dataSource());
