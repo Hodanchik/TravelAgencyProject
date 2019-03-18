@@ -1,17 +1,13 @@
-package dao;
-
+package service;
 
 import entity.Country;
 
-import org.springframework.stereotype.Repository;
+public interface CountryService {
 
-@Repository
-public interface CountryDao {
     void addCountry(Country country);
 
     void updateCountry(Country country);
 
     void deleteCountry(Country country);
-
 
 }

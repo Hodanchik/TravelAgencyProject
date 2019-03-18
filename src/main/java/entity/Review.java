@@ -1,11 +1,12 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Review {
 
     private int id;
-    private Date date;
+    private LocalDate data;
     private String text;
     private int user_id;
     private int tour_id;
@@ -13,12 +14,19 @@ public class Review {
     public Review() {
     }
 
-    public Review(int id, Date date, String text, int user_id, int tour_id) {
-        this.id = id;
-        this.date = date;
+    public Review(LocalDate data, String text, int user_id, int tour_id) {
+        this.data = data;
         this.text = text;
         this.user_id = user_id;
         this.tour_id = tour_id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public int getId() {
@@ -29,13 +37,6 @@ public class Review {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getText() {
         return text;
@@ -65,7 +66,7 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", date=" + date +
+                ", data=" + data +
                 ", text='" + text + '\'' +
                 ", user_id=" + user_id +
                 ", tour_id=" + tour_id +

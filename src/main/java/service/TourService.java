@@ -1,10 +1,8 @@
-package dao;
+package service;
 
 import entity.Tour;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface TourDao {
+public interface TourService{
 
     void addTour(Tour tour);
 

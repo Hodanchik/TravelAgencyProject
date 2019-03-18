@@ -1,16 +1,19 @@
-package dao;
-
+import dao.UserDao;
+import dao.huinya.AppConfig;
+import dao.impls.UserDaoImpl;
 import entity.*;
 
 import generate.MyGenerator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import service.ReviewService;
+import service.TourService;
+import service.UserService;
+import service.impls.ReviewServiceImpl;
+import service.impls.TourServiceImpl;
+import service.impls.UserServiceImpl;
 
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -27,17 +30,15 @@ public class Main {
 //сейчас ничего нет
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 //прочитало конфиг. там создало dataSource и template и поместило в контейнер
-        // MyGenerator gen = new MyGenerator();
-        ArrayList<FeaturesType> features = new ArrayList();
-        features.add(FeaturesType.BALCONY);
-        features.add(FeaturesType.TV);
-        Hotel hoteln = new Hotel(2, "rabotaet", 5, "vseokeushki", 32.3f, -32.0f, features);
+        MyGenerator gen = new MyGenerator();
+for(int i = 1; i<1000; i++) {
+    Review reviewn = gen.generatorReview();
 
-        HotelDaoImpl userTesr = ctx.getBean(HotelDaoImpl.class);
+    // UserDao userTesr = ctx.getBean(UserDaoImpl.class);
+    ReviewService userTesr = ctx.getBean(ReviewServiceImpl.class);
 
-
-        userTesr.updateHotel(hoteln);
-
+    userTesr.addReview(reviewn);
+}
     }
 }
 

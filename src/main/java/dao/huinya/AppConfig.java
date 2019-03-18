@@ -1,9 +1,11 @@
-package dao;
+package dao.huinya;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
+import dao.impls.UserDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
-@ComponentScan(basePackages = {"dao"})
+@ComponentScan(basePackages = {"dao, service"})
+
 public class AppConfig {
 
     @Bean
@@ -35,6 +38,7 @@ public class AppConfig {
     public JdbcTemplate jdbcTemplate(DataSource dataSource) throws SQLException {
         return new JdbcTemplate(dataSource());
     }
+
 }
 
 

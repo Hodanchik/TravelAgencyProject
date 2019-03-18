@@ -1,5 +1,6 @@
-package dao;
+package dao.impls;
 
+import dao.HotelDao;
 import entity.FeaturesType;
 import entity.Hotel;
 
@@ -30,14 +31,6 @@ public class HotelDaoImpl implements HotelDao {
                args,  Integer.class);
         hotel.setId(id);
     }
-
-//    @Override
-//    public void save(Hotel hotel) {
-//        args = {hotel.getName(), hotel.getStars(), hotel.getWebsite(),
-//                hotel.getLalitude(), hotel.getLongitude(), createSqlArray(hotel.getFeatures())};
-//        hotel.setId(jdbcTemplate.queryForObject(ADD_HOTEL_QUERY, args, Integer.class));
-//    }
-
 
     @Override
     public void updateHotel(Hotel hotel) {

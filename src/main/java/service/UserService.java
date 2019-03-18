@@ -1,17 +1,13 @@
-package dao;
+package service;
 
 import entity.User;
-import org.springframework.stereotype.Repository;
 
-@Repository
-
-public interface UserDao {
+public interface UserService {
 
     void addUser(User user);
 
     void updateUser(User user);
 
     void deleteUser(User user);
-
 
 }

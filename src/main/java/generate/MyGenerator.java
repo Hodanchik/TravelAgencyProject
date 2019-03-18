@@ -1,10 +1,7 @@
 package generate;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import entity.FeaturesType;
-import entity.Hotel;
-import entity.Tour;
-import entity.TourType;
+import entity.*;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.company.Company;
 import me.xdrop.jrand.JRand;
@@ -65,13 +62,13 @@ public class MyGenerator {
             long days = from.until(to, ChronoUnit.DAYS);
             long randomDays = ThreadLocalRandom.current().nextLong(days);
             LocalDate randomDate = from.plusDays(randomDays);
-            System.out.println(randomDate);
+
 
             int duration = (int) ((Math.random() * 14) + 2);
 
 
             LoremIpsum loremIpsum = new LoremIpsum();
-            String description = loremIpsum.getWords(new Random().nextInt(15), new Random().nextInt(20));
+            String description = loremIpsum.getWords(new Random().nextInt(15)+4, new Random().nextInt(20)+3);
 
             int cost = (int) ((Math.random() * 800) + 200);
 
@@ -86,10 +83,27 @@ public class MyGenerator {
 
 
             Tour tour = new Tour(photo, randomDate, duration, description, cost, tourtype, hotel_id, country_id);
-            System.out.println(tour);
+
             return tour;
 
 
+        }
+        public Review generatorReview(){
+
+            LocalDate from = LocalDate.of(2019, 1, 1);
+            LocalDate to = LocalDate.of(2020, 1, 1);
+            long days = from.until(to, ChronoUnit.DAYS);
+            long randomDays = ThreadLocalRandom.current().nextLong(days);
+            LocalDate randomDate = from.plusDays(randomDays);
+
+            LoremIpsum loremIpsum = new LoremIpsum();
+            String text = loremIpsum.getWords(new Random().nextInt(15)+1, new Random().nextInt(20)+3);
+
+            int user_id = (int)((Math.random() * 900) + 7);
+            int tour_id = (int)((Math.random() * 900) + 7);
+
+Review review = new Review(randomDate, text, user_id, tour_id);
+        return review;
         }
 
         public List<String> readFiles () {
