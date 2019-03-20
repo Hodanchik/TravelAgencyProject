@@ -30,17 +30,15 @@ public class Main {
 //сейчас ничего нет
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 //прочитало конфиг. там создало dataSource и template и поместило в контейнер
-        MyGenerator gen = new MyGenerator();
-for(int i = 1; i<1000; i++) {
-    Review reviewn = gen.generatorReview();
+        User iser = new User("rdfg", "rdf");
+    UserDao userTesr = ctx.getBean(UserDaoImpl.class);
+    UserService userTer = ctx.getBean(UserServiceImpl.class);
 
-    // UserDao userTesr = ctx.getBean(UserDaoImpl.class);
-    ReviewService userTesr = ctx.getBean(ReviewServiceImpl.class);
-
-    userTesr.addReview(reviewn);
+    userTer.addUser(iser);
 }
     }
-}
+
+
 
 
 

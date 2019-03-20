@@ -1,8 +1,9 @@
 package service.impls;
 
 import dao.CountryDao;
-import dao.impls.CountryDaoImpl;
+
 import entity.Country;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import service.CountryService;
@@ -11,9 +12,11 @@ public class CountryServiceImpl  implements CountryService {
 
     @Autowired
     private CountryDao countryDao;
+
     @Override
     public void addCountry(Country country) {
-       countryDao.addCountry(country);
+
+        countryDao.addCountry(country);
     }
 
     @Override
