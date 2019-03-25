@@ -16,8 +16,11 @@ public class CountryDaoImpl implements CountryDao {
 
     @Override
     public void addCountry(Country country) {
-        int id = jdbcTemplate.queryForObject("INSERT INTO public.\"Country\"(name) VALUES (?) RETURNING ID;",
-                new Object[] { country.getName()}, new int[] {12}, Integer.class);
+        jdbcTemplate.update("INSERT INTO public.\"Country\"(name) VALUES (?)",
+                 country.getName(), Integer.class);
+
+        int id = jdbcTemplate.queryForObject("SELECT id FROM public.\"Country\" WHERE name = ?",
+                new Object[] { country.getName()}, Integer.class);
         country.setId(id);
     }
 

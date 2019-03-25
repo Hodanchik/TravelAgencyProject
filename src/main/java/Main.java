@@ -30,11 +30,12 @@ public class Main {
 //сейчас ничего нет
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 //прочитало конфиг. там создало dataSource и template и поместило в контейнер
-        User iser = new User("rdfg", "rdf");
+      //  User iser = new User();
     UserDao userTesr = ctx.getBean(UserDaoImpl.class);
-    UserService userTer = ctx.getBean(UserServiceImpl.class);
+    UserDaoImpl userTer = ctx.getBean(UserDaoImpl.class);
 
-    userTer.addUser(iser);
+        User userById = userTer.getUserById(5);
+        System.out.println( userById);
 }
     }
 

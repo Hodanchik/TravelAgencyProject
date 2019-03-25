@@ -1,9 +1,8 @@
 package entity;
 
 
+import java.sql.Date;
 import java.time.LocalDate;
-
-import java.util.Date;
 
 public class Tour {
     private int id;
@@ -131,5 +130,6 @@ public class Tour {
                 ", country_id=" + country_id +
                 '}';
     }
+
 
 }

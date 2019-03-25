@@ -14,8 +14,11 @@ public class ReviewImpl implements ReviewDao {
 
     @Override
     public void addReview(Review review) {
-        int id = jdbcTemplate.queryForObject("INSERT INTO public.\"Review\"( date, text, user_id, tour_id) VALUES (?, ?, ?, ?) RETURNING ID",
-                new Object[]{review.getData(), review.getText(), review.getUser_id(), review.getTour_id()}, Integer.class);
+        jdbcTemplate.update("INSERT INTO public.\"Review\"( date, text, user_id, tour_id) VALUES (?, ?, ?, ?)",
+                new Object[]{review.getData(), review.getText(), review.getUser_id(), review.getTour_id()});
+
+        int id = jdbcTemplate.queryForObject("SELECT id FROM Review WHERE date = ? and text=? and user_id=? and tour_id=?",
+                new Object[]{review.getData(), review.getText(), review.getUser_id(), review.getTour_id()}, Integer.class );
         review.setId(id);
     }
 

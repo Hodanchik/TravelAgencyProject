@@ -23,12 +23,12 @@ public class HotelDaoImpl implements HotelDao {
 
     @Override
     public void addHotel(Hotel hotel) {
-//int id = jdbcTemplate.("INSERT INTO public.\"Hotel\" (name, stars, website, lalitude, longitude, features) VALUES (?, ?, ?, ?, ?, ?) RETURNING ID;",
-//        new Object [] {hotel.getName(), hotel.getStars(), hotel.getWebsite(), hotel.getLalitude(), hotel.getLongitude(), hotel.getFeatures()},
-//        new int[] {12, 4, 12, 6, 6, 1111}, Integer.class);
+
         Object [] args = {hotel.getName(), hotel.getStars(), hotel.getWebsite(), hotel.getLalitude(), hotel.getLongitude(), createSqlArray(hotel.getFeatures())};
-        int id=jdbcTemplate.queryForObject("INSERT INTO public.\"Hotel\" (name, stars, website, lalitude, longitude, features) VALUES (?, ?, ?, ?, ?, ?)RETURNING ID;",
-               args,  Integer.class);
+        jdbcTemplate.update("INSERT INTO public.\"Hotel\" (name, stars, website, lalitude, longitude, features) VALUES (?, ?, ?, ?, ?, ?)",
+               args);
+        int id=jdbcTemplate.queryForObject("SELECT id FROM Hotel WHERE name=? and stars=? and website=? and lalitude=? and longitude=?",
+                new Object []{hotel.getName(), hotel.getStars(), hotel.getWebsite(), hotel.getLalitude(), hotel.getLongitude()}, Integer.class);
         hotel.setId(id);
     }
 

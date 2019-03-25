@@ -1,59 +1,58 @@
 package dao.impls;
 
-import dao.DaoUtils;
 import dao.DbSetup;
-import dao.UserDao;
 import entity.User;
-import org.hamcrest.core.Is;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import static org.junit.Assert.*;
+
+
 @Repository
 @Component
 public class UserDaoImplTest extends DbSetup {
 
-//@Autowired
-  UserDaoImpl userDao  ;
 
-    DaoUtils daoUtils;
-    User user;
+    UserDaoImpl userDao;
+
+   User user = new User("Tester", "Test");
     User temp;
-
 
 
     @Before
     public void setUp() throws Exception {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DbSetup.class);
         userDao = ctx.getBean(UserDaoImpl.class);
-//        userDao = jdbi.onDemand(UserDaoImpl.class);
-//        daoUtils = jdbi.onDemand(DaoUtils.class);
-//        daoUtils.deleteUsers();
+
     }
+
     @Test
     public void addUser() {
-        user = new User();
-        user.setLogin("dfgc");
-        user.setPassword("drtgh");
         userDao.addUser(user);
-        temp = new User(user.getId());
-
-        Assert.assertEquals("dfgc", temp.getLogin());
+        temp = userDao.getUserById(user.getId());
+        Assert.assertEquals(user.getId(), temp.getId());
         userDao.deleteUser(user);
     }
 
     @Test
     public void updateUser() {
+        userDao.addUser(user);
+        User temp = userDao.getUserById(user.getId());
+        userDao.updateUser(new User(user.getId(), "NewLogin", "NewPassword"));
+        user = userDao.getUserById(user.getId());
+        Assert.assertNotEquals(user, temp);
+
     }
 
-    @Test
+    @Test(expected = EmptyResultDataAccessException.class)
     public void deleteUser() {
+        userDao.addUser(user);
+        userDao.deleteUser(user);
+        userDao.getUserById(user.getId());
     }
 }

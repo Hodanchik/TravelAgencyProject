@@ -12,4 +12,6 @@ public interface TourDao {
 
     void deleteTour(Tour tour);
 
+    Tour getTourById(int id);
+
 }
