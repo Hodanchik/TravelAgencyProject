@@ -26,4 +26,9 @@ tourDao.addTour(tour);
     public void deleteTour(Tour tour) {
         tourDao.deleteTour(tour);
     }
+
+    @Override
+    public Tour getTourById(int id) {
+        return null;
+    }
 }

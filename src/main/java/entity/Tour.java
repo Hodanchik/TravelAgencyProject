@@ -1,7 +1,7 @@
 package entity;
 
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class Tour {
@@ -130,6 +130,4 @@ public class Tour {
                 ", country_id=" + country_id +
                 '}';
     }
-
-
 }

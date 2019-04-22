@@ -28,14 +28,12 @@ public class UserDaoImplTest extends DbSetup {
     public void setUp() throws Exception {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DbSetup.class);
         userDao = ctx.getBean(UserDaoImpl.class);
-
     }
 
     @Test
     public void addUser() {
         userDao.addUser(user);
-        temp = userDao.getUserById(user.getId());
-        Assert.assertEquals(user.getId(), temp.getId());
+        Assert.assertNotEquals(user.getId(), 0);
         userDao.deleteUser(user);
     }
 

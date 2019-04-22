@@ -26,44 +26,40 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
 
-
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public  void setDataSource(DataSource dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
     @Override
     public void addUser(User user) {
-
-       jdbcTemplate.update("INSERT INTO users(id, login, password) VALUES (DEFAULT, ?, ?)",
-                user.getLogin(), user.getPassword());
-
-
-       int id = jdbcTemplate.queryForObject("SELECT id FROM users WHERE login = ? and password = ?",
-               new Object[]{ user.getLogin(), user.getPassword()}, Integer.class);
-        System.out.println(id);
-       user.setId(id);
+        Object[] arg = new Object[]{user.getLogin(), user.getPassword()};
+        int id = jdbcTemplate.queryForObject("INSERT INTO users(id, login, password) VALUES (DEFAULT, ?, ?)",
+                arg, Integer.class);
+        user.setId(id);
     }
-    @Override
-    public User getUserById (int id){
-            String sql = "Select * FROM users where ID=?";
-            User user = jdbcTemplate.queryForObject(sql,
-                    new Object[] { id }, new RowMapper<User>() {
-                        @Override
-                        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            User user2 = new User();
-                            user2.setId(rs.getInt("id"));
-                            user2.setLogin(rs.getString("login"));
-                            user2.setPassword(rs.getString("password"));
-                            return user2;
-                        }
 
-                    });
+    @Override
+    public User getUserById(int id) {
+        String sql = "Select * FROM users where ID=?";
+        User user = jdbcTemplate.queryForObject(sql,
+                new Object[]{id}, new RowMapper<User>() {
+                    @Override
+                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        User user2 = new User();
+                        user2.setId(rs.getInt("id"));
+                        user2.setLogin(rs.getString("login"));
+                        user2.setPassword(rs.getString("password"));
+                        return user2;
+                    }
+
+                });
 
         return user;
 
-        }
+    }
 
     @Override
     public void updateUser(User user) {

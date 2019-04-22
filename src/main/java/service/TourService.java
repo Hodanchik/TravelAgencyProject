@@ -10,4 +10,5 @@ public interface TourService{
 
     void deleteTour(Tour tour);
 
+    Tour getTourById(int id);
 }

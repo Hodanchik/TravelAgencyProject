@@ -23,6 +23,14 @@ public class Hotel {
         this.website = website;
     }
 
+    public Hotel(String name, int stars, String website, float lalitude, float longitude) {
+        this.name = name;
+        this.stars = stars;
+        this.website = website;
+        this.lalitude = lalitude;
+        this.longitude = longitude;
+    }
+
     public Hotel(int id, String name, int stars, String website, float lalitude, float longitude) {
         this.id = id;
         this.name = name;

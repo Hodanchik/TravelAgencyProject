@@ -1,0 +1,1 @@
+insert into users (login, password) values ('rmagnay0@berkeley.edu', 'UYAs70B9CH');

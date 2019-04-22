@@ -10,4 +10,5 @@ public interface CountryService {
 
     void deleteCountry(Country country);
 
+    Country getCountryById(int id);
 }

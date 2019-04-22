@@ -10,4 +10,5 @@ public interface HotelService {
 
     void deleteHotel(Hotel hotel);
 
+    Hotel getHotelById(int id);
 }

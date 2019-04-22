@@ -10,4 +10,5 @@ public interface ReviewService {
 
     void deleteReview(Review review);
 
+    Review getReviewById(int id);
 }

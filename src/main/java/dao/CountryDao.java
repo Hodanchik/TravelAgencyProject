@@ -13,5 +13,6 @@ public interface CountryDao {
 
     void deleteCountry(Country country);
 
+    Country getCountryById(int id);
 
 }
